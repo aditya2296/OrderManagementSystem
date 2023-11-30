@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #itemTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #itemTable th, #itemTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #itemTable th {
+            background-color: #f2f2f2;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #itemTable {
+                border: 0;
+            }
+
+            #itemTable thead {
+                display: none;
+            }
+
+            #itemTable tbody td {
+                display: block;
+                text-align: center;
+            }
+
+            #itemTable tbody td:before {
+                content: attr(data-label);
+                display: inline-block;
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="item-details-container">
+        <h1 style="text-align:center">Item Details</h1>
+        <div class="button-container">
+            <button onclick="openNewItemClick()">Enter New Item</button>
+            <button onclick="openExcelItemClick()">Import</button>
+            <button onclick="returnDashboard()">Dashboard</button>
+        </div>
+
+        <!-- Table to display item details -->
+        <table id="itemTable">
+            <thead>
+                <tr>
+                    <th>Date of Purchase</th>
+                    <th>Item Name</th>
+                    <th>Item Group</th>
+                    <th>Quantity</th>
+                    <th>MRP</th>
+                    <th>Discount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in item_details %}
+                <tr>
+                    <td>{{ item['Date of Purchase'] }}</td>
+                    <td>{{ item['Item Name'] }}</td>
+                    <td>{{ item['Company Name'] }}</td>
+                    <td>{{ item['Quantity'] }}</td>
+                    <td>{{ item['Price'] }}</td>
+                    <td>{{ item['Discount'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function openNewItemClick() {
+            window.location.href = "{{ url_for('new_item') }}";
+        }
+        function openExcelItemClick() {
+            window.location.href = "{{ url_for('insert_excel_page') }}";
+        }
+        function returnDashboard() {
+            window.location.href = "{{ url_for('dashboard')}}"
+        }
+    </script>
+</body>
+</html>

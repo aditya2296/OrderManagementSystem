@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="common-body">
+    <div class="login-container position-relative">
+        <h1>OMS</h1>
+        <form method="POST" action="{{ url_for('login') }}">
+            <label for="loginId">Login ID:</label>
+            <input type="text" id="loginId" name="loginId" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+        <p>Forgot your password? <a href="/forgot_password">Reset it</a></p>
+    </div>
+</body>
+</html>
+
+

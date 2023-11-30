@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #customerTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #customerTable th, #customerTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #customerTable th {
+            background-color: #f2f2f2;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #customerTable {
+                border: 0;
+            }
+
+            #customerTable thead {
+                display: none;
+            }
+
+            #customerTable tbody td {
+                display: block;
+                text-align: center;
+            }
+
+            #customerTable tbody td:before {
+                content: attr(data-label);
+                display: inline-block;
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="customer-details-container">
+        <h1 class="customer-details-header">Customer Details</h1>
+    </div>
+    <div>
+        <div class="button-container">
+            <button onclick="addCustomer()">Add New Customer</button>
+            <button onclick="addCustomerExcelFile()">Import</button>
+            <button onclick="returnDashboard()">Dashboard</button>
+        </div>
+    </div>
+        <!-- Table to display item details -->
+        <table id="customerTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Customer Name</th>
+                    <th>Location</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Billing Type</th>
+                    <th>Delivery Type</th>
+                    <th>Route</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customer_details%}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.customer_name }}</td>
+                    <td>{{ customer.customer_location }}</td>
+                    <td>{{ customer.customer_phone_number }}</td>
+                    <td>{{ customer.customer_email }}</td>
+                    <td>{{ customer.customer_billing_type }}</td>
+                    <td>{{ customer.customer_delivery_type }}</td>
+                    <td>{{ customer.customer_route }}</td>
+                    <td class="action-links">
+                        <a href="{{ url_for('edit_customer', customer_id=customer.id) }}">Edit</a>
+                        <a href="{{ url_for('delete_customer', customer_id=customer.id) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function addCustomer() {
+            window.location.href = "{{ url_for('new_customer') }}";
+        }
+        function addCustomerExcelFile() {
+            window.location.href = "{{ url_for('insert_customer_page') }}";
+        }
+        function returnDashboard() {
+            window.location.href = "{{ url_for('dashboard')}}"
+        }
+    </script>
+</body>
+</html>

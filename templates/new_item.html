@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter New Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="common-body">
+    <div class="new-item-container">
+        <h2>Enter New Item</h2>
+        <form onsubmit="return insertNewItem()">
+            <!-- Form to enter new item details -->
+            <label for="newItemDate" class="required">Date of Purchase</label>
+            <input type="date" id="newItemDate" name="newItemDate" required>
+
+            <label for="newItemName" class="required">Item Name</label>
+            <input type="text" id="newItemName" name="newItemName" required>
+
+            <label for="newItemCompany" class="required">Item Group</label>
+            <input type="text" id="newItemCompany" name="newItemCompany" required>
+
+            <label for="newItemQuantity" class="required">Quantity</label>
+            <input type="number" id="newItemQuantity" name="newItemQuantity" required>
+
+            <label for="newItemPrice" class="required">MRP</label>
+            <input type="number" id="newItemPrice" name="newItemPrice" required>
+
+            <label for="newItemDiscount">Discount</label>
+            <input type="number" id="newItemDiscount" name="newItemDiscount">
+
+            <button type="submit">Insert</button>
+        </form>
+    </div>
+
+    <script>
+        function setTodaysDate() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+
+            document.getElementById('newItemDate').value = today;
+            document.getElementById('newItemDiscount').value = 0;
+        }
+
+        // Call setTodaysDate when the page loads
+        window.onload = setTodaysDate;
+
+        function insertNewItem() {
+            // Get values from the form
+            var newItemDate = document.getElementById('newItemDate').value;
+            var newItemName = document.getElementById('newItemName').value;
+            var newItemCompany = document.getElementById('newItemCompany').value;
+            var newItemQuantity = document.getElementById('newItemQuantity').value;
+            var newItemPrice = document.getElementById('newItemPrice').value;
+            var newItemDiscount = document.getElementById('newItemDiscount').value;
+
+            // Create a new FormData object to send data to the server (Flask)
+            var formData = new FormData();
+            formData.append('newItemDate', newItemDate);
+            formData.append('newItemName', newItemName);
+            formData.append('newItemCompany', newItemCompany);
+            formData.append('newItemQuantity', newItemQuantity);
+            formData.append('newItemPrice', newItemPrice);
+            formData.append('newItemDiscount', newItemDiscount);
+
+            // Send a POST request to the server to save the new item
+            fetch("{{ url_for('save_new_item') }}", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Check if the response is successful (you might want to add more checks)
+                if (response.ok) {
+                    // Redirect to the item_details page
+                    window.location.href = "{{ url_for('item_details') }}";
+                } else {
+                    // Handle error
+                    console.error("Error saving new item");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+
+            // Prevent the form from submitting and reloading the page
+            return false;
+        }
+    </script>
+</body>
+</html>

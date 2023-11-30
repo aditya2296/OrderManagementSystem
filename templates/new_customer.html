@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Customer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="common-body">
+    <div class="new-customer-container">
+        <h2>Add New Customer</h2>
+        <form onsubmit="return addNewCustomer()">
+            <!-- Form to enter new item details -->
+            <div>
+                <div>
+                    <label for="newCustomerName" class="required">Customer Name</label>
+                    <input type="text" id="newCustomerName" name="newCustomerName" required>
+                </div>
+                <div>
+                    <label for="newCustomerLocation" class="required">Location</label>
+                    <input type="text" id="newCustomerLocation" name="newCustomerLocation" required>
+                </div>
+                <div>
+                    <label for="newPhoneNumber" class="required">Mobile Number</label>
+                    <input type="number" id="newPhoneNumber" name="newPhoneNumber" required>
+                </div>
+                <div>
+                    <label for="newCustomerEmail">Email</label>
+                    <input type="text" id="newCustomerEmail" name="newCustomerEmail">
+                </div>
+            </div>
+            <div>
+                <div class="drop-down-styles">
+                    <label for="CustomerBillingType">Billing Type</label>
+                    <select name="CustomerBillingType" id="CustomerBillingType" required>
+                        <option value="Darpan">Darpan</option>
+                        <option value="Busy">Busy</option>
+                        <option value="Tally">Tally</option>
+                        <option value="Darpan+Busy">Darpan+Busy</option>
+                        <option value="Darpan+Tally">Darpan+Tally</option>
+                    </select>
+                </div>
+                <div class="drop-down-styles">
+                    <label for="CustomerDeliveryType">Delivery Type</label>
+                        <select name="CustomerDeliveryType" id="CustomerDeliveryType" required>
+                            <option value="Self">Self</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Courier">Courier</option>
+                            <option value="KSC">KSC Pickup</option>
+                        </select>
+                </div>
+                <div class="drop-down-styles">
+                    <label for="Route">Route</label>
+                        <select name="Route" id="Route" required>
+                            <option value="Route 1">Route 1</option>
+                            <option value="Route 2">Route 2</option>
+                            <option value="Route 3">Route 3</option>
+                        </select>
+                </div>
+            </div>
+            <button type="submit">Insert</button>
+        </form>
+    </div>
+
+    <script>
+        function addNewCustomer() { 
+            var newCustomerName = document.getElementById('newCustomerName').value;
+            var newCustomerLocation = document.getElementById('newCustomerLocation').value;
+            var newPhoneNumber = document.getElementById('newPhoneNumber').value;
+            var newCustomerEmail = document.getElementById('newCustomerEmail').value;
+            var customerBillingType = document.getElementById('CustomerBillingType').value
+            var customerDeliveryType = document.getElementById('CustomerDeliveryType').value
+            var route = document.getElementById('Route').value
+
+            // Create a new FormData object to send data to the server (Flask)
+            var formData = new FormData();
+            formData.append('newCustomerName', newCustomerName)
+            formData.append('newCustomerLocation', newCustomerLocation)
+            formData.append('newPhoneNumber', newPhoneNumber)
+            formData.append('newCustomerEmail', newCustomerEmail)
+            formData.append('CustomerBillingType', customerBillingType)
+            formData.append('CustomerDeliveryType', customerDeliveryType)
+            formData.append('Route', route)
+
+            // Send a POST request to the server to save the new item
+            fetch("{{ url_for('save_new_customer') }}", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Check if the response is successful (you might want to add more checks)
+                if (response.ok) {
+                    // Redirect to the item_details page
+                    window.location.href = "{{ url_for('customer_details') }}";
+                } else {
+                    // Handle error
+                    console.error("Error saving new customer");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+
+            // Prevent the form from submitting and reloading the page
+            return false;
+        
+        }
+    </script>
+</body>
+</html>

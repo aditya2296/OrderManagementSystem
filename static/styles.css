@@ -1,0 +1,133 @@
+.common-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('images/bg_pen_diary.jpg');  /* Add the path to your background image */
+    background-size: cover;
+    background-position: center;
+}
+
+.login-container {
+    background-color: rgba(7, 246, 235, 0.88); /* Blue background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: black; /* White text color for better readability on the blue background */
+}
+
+.login-container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-top: 10px;
+    color: #333; /* Dark text color for labels */
+}
+
+input {
+    padding: 8px;
+    margin: 6px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #3c4b58;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.2em; /* Increase font size for the button */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.position-relative {
+    position: relative!important;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.dashboard-container {
+    background-color: rgba(7, 246, 235, 0.88);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.dashboard-icons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.dashboard-icon {
+    cursor: pointer;
+}
+
+.dashboard-icon img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.dashboard-icon p {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.customer-details-header {
+    text-align: center;
+}
+.button-container button {
+    margin-right: 10px;
+}
+
+.required::after {
+    content: ' *';
+    color: red;
+}
+
+.drop-down-styles {
+    margin-bottom: 10px;
+}
+
+.action-links {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+}

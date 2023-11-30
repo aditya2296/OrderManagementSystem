@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+    <title>OMS</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- First Div -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-header">
+                <img src="{{ url_for('static', filename='images/oms_circle.png') }}" alt="OMS Logo">
+                <h1>OMS</h1>
+            </div>
+            <!-- Inside the .dashboard-links div -->
+            <div class="dashboard-links">
+                <div>
+                    <a href="{{ url_for('dashboard') }}">
+                        <img src="{{ url_for('static', filename='images/oms_circle.png') }}" alt="Dashboard Icon" class="link-icon">
+                        <p style="color: #8391A2;">Dashboard</p>
+                    </a>
+                    <a href="{{ url_for('item_details') }}">
+                        <img src="{{ url_for('static', filename='images/oms_circle.png') }}" alt="Dashboard Icon" class="link-icon">
+                        <p style="color: #8391A2;">Items</p>
+                    </a>
+                    <a href="{{ url_for('customer_details') }}">
+                        <img src="{{ url_for('static', filename='images/oms_circle.png') }}" alt="Dashboard Icon" class="link-icon">
+                        <p style="color: #8391A2;">Customers</p>
+                    </a>
+                    <a href="{{ url_for('dashboard') }}">
+                        <img src="{{ url_for('static', filename='images/oms_circle.png') }}" alt="Dashboard Icon" class="link-icon">
+                        <p style="color: #8391A2;">Users</p>
+                    </a>
+                    <a href="{{ url_for('dashboard') }}">
+                        <img src="{{ url_for('static', filename='images/oms_circle.png') }}" alt="Dashboard Icon" class="link-icon">
+                        <p style="color: #8391A2;">Settings</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Divs (Add your content here) -->
+        <div class="dashboard-content">
+            <!-- Content for the second div -->
+        </div>
+        <div class="dashboard-footer">
+            <!-- Content for the third div -->
+        </div>
+    </div>
+</body>
+</html>

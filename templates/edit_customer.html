@@ -1,0 +1,50 @@
+<!-- edit_customer.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer</title>
+</head>
+<body>
+    <h1>Edit Customer</h1>
+    <form method="post" action="{{ url_for('edit_customer', customer_id=customer.id) }}">
+        <div>
+            <label for="newCustomerName" class="required">Customer Name</label>
+            <input type="text" id="newCustomerName" value="{{customer.customer_name}}" name="newCustomerName" required>
+            <label for="newCustomerLocation" class="required">Location</label>
+            <input type="text" id="newCustomerLocation" value="{{customer.customer_location}}" name="newCustomerLocation" required>
+            <label for="newPhoneNumber" class="required">Mobile Number</label>
+            <input type="number" id="newPhoneNumber"  value="{{customer.customer_phone_number}}" name="newPhoneNumber" required>
+            <label for="newCustomerEmail">Email</label>
+            <input type="text" id="newCustomerEmail"  value="{{customer.customer_email}}" name="newCustomerEmail">
+        </div>
+        <div>
+            <label for="CustomerBillingType">Billing Type</label>
+            <select name="CustomerBillingType" id="CustomerBillingType" required>
+                <option value="Darpan" {% if customer.customer_billing_type == 'Darpan' %}selected{% endif %}>Darpan</option>
+                <option value="Busy" {% if customer.customer_billing_type == 'Busy' %}selected{% endif %}>Busy</option>
+                <option value="Tally" {% if customer.customer_billing_type =='Tally' %}selected{% endif %}>Tally</option>
+                <option value="Darpan+Busy" {% if customer.customer_billing_type =='Darpan+Busy' %}selected{% endif %}>Darpan+Busy</option>
+                <option value="Darpan+Tally" {% if customer.customer_billing_type =='Darpan+Tally' %}selected{% endif %}>Darpan+Tally</option>
+            </select>
+            <label for="CustomerDeliveryType">Delivery Type</label>
+                <select name="CustomerDeliveryType" id="CustomerDeliveryType" required>
+                    <option value="Self" {% if customer.customer_delivery_type == 'Self' %}selected{% endif %}>Self</option>
+                    <option value="Transport" {% if customer.customer_delivery_type == 'Transport' %}selected{% endif %}>Transport</option>
+                    <option value="Courier" {% if customer.customer_delivery_type == 'Courier' %}selected{% endif %}>Courier</option>
+                    <option value="KSC" {% if customer.customer_delivery_type == 'KSC' %}selected{% endif %}>KSC Pickup</option>
+                </select>
+            <label for="Route">Route</label>
+                <select name="Route" id="Route" required>
+                    <option value="Route 1" {% if customer.customer_route == 'Route 1' %}selected{% endif %}>Route 1</option>
+                    <option value="Route 2" {% if customer.customer_route == 'Route 2' %}selected{% endif %}>Route 2</option>
+                    <option value="Route 3" {% if customer.customer_route == 'Route 3' %}selected{% endif %}>Route 3</option>
+                </select>
+        </div>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

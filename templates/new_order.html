@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='order-booking-style.css') }}">
+    <title>New Order Page</title>
+</head>
+<body>
+    <div class="order-container">
+        <div class="header">
+            <div class="checkboxes">
+                <input type="radio" id="darpanRadio" name="software" value="Darpan">
+                <label for="darpanRadio">Darpan</label>
+            
+                <input type="radio" id="busyRadio" name="software" value="Busy">
+                <label for="busyRadio">Busy</label>
+            
+                <input type="radio" id="tallyRadio" name="software" value="Tally">
+                <label for="tallyRadio">Tally</label>
+            </div>
+        </div>
+
+        <div class="customer-details" id="customerDetails">
+            <input type="text" id="customerName" name="customerName" placeholder="Enter customer name">
+            <input type="text" id="customerLocation" name="Location" placeholder="Enter customer location">
+            <input type="number" id="customerPhone" name="Phone" placeholder="Enter customer number">
+        </div>
+
+        <div class="item-table">
+            <table id="orderTable">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Qty</th>
+                        <th>Desc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bottom-section">
+            <label for="priorityDropdown">Priority:</label>
+            <select id="priorityDropdown">
+                <option value="Low" selected>Low</option>
+                <option value="Normal">Normal</option>
+                <option value="Urgent">Urgent</option>
+            </select>
+        
+            <button onclick="submitOrder()">Submit</button>
+        </div>
+    </div>
+    <script>
+        function submitOrder() {
+        var selectedCheckbox = document.querySelector('input[name="software"]:checked');
+        var checkboxValue = selectedCheckbox ? selectedCheckbox.value : '';
+
+        var customerName = document.getElementById("customerName").value;
+        var priorityDropdown = document.getElementById("priorityDropdown");
+        var selectedPriority = priorityDropdown.options[priorityDropdown.selectedIndex].value;
+        var alertMessage = "Order Details:\n";
+        alertMessage += "Checkbox Selected: " + checkboxValue + "\n";
+        alertMessage += "Customer Name: " + customerName + "\n";
+        alertMessage += "Customer Contact: " + customerPhone + "\n";
+        alertMessage += "Priority: " + selectedPriority;
+        alert(alertMessage);
+    }
+    </script>
+</body>
+</html>
